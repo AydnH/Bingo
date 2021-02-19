@@ -1,0 +1,98 @@
+:root {
+	font-size: 10px;
+	--neon-text-color: #ffff;
+	--neon-border-color: #4ec9b0;
+}
+
+.background {
+	position: absolute;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	z-index: -999;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: rgba(30, 30, 30, 0.97);
+}
+.App {
+	font-family: sans-serif;
+	text-align: center;
+}
+h1 {
+	font-size: 5vh;
+	font-weight: 200;
+	font-style: italic;
+	color: #fff;
+	border: 0.4rem solid #fff;
+	border-radius: 20px;
+	text-transform: uppercase;
+	animation: flicker 1.5s infinite alternate;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+h1:focus {
+	outline: none;
+}
+.wrapper {
+	padding-top: 5%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: repeat(5, auto);
+}
+
+.tile {
+	background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1vmin;
+	height: 10vh;
+	width: 10vw;
+	font-weight: bold;
+	font-size: 1.5vmin;
+	color: #fff;
+	border: 2px #fff solid;
+	border-radius: 1em;
+	box-shadow: 0 0 10px 4px #fff, 2px 2px 20px 6px #d197d1;
+	cursor: pointer;
+}
+
+.tile-set {
+	border: 3px #d25252 solid;
+	box-shadow: 0 0 10px 4px #fff, 2px 2px 20px 6px #d25252;
+}
+
+/* Animate neon flicker */
+@keyframes flicker {
+	0%,
+	19%,
+	21%,
+	23%,
+	25%,
+	54%,
+	56%,
+	100% {
+		text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff,
+			0 0 2rem var(--neon-text-color), 0 0 4rem var(--neon-text-color),
+			0 0 6rem var(--neon-text-color), 0 0 8rem var(--neon-text-color),
+			0 0 10rem var(--neon-text-color);
+
+		box-shadow: 0 0 0.5rem #fff, inset 0 0 0.5rem #fff,
+			0 0 2rem var(--neon-border-color), inset 0 0 2rem var(--neon-border-color),
+			0 0 4rem var(--neon-border-color), inset 0 0 4rem var(--neon-border-color);
+	}
+
+	20%,
+	24%,
+	55% {
+		text-shadow: none;
+		box-shadow: none;
+	}
+}
