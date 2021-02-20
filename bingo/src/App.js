@@ -6,6 +6,10 @@ import { Data } from './Array';
 
 //use of arrayshuffle to randomise array 
 const shuffled = arrayShuffle(Data);
+const free = " ";
+//insert empty value into middle of string
+const bingoArray = shuffled.splice(12, 0, free);
+console.log(bingoArray);
 
 //tile format
 function Tile({ id, children, onToggle, isSet }) {
@@ -14,6 +18,10 @@ function Tile({ id, children, onToggle, isSet }) {
       {children}
     </div>
   );
+}
+
+function refresh(){
+  window.location.reload(false);
 }
 
 export default function App() {
@@ -33,7 +41,6 @@ export default function App() {
         range.every(index => checked[index * 5 + 4 - index])
     );
   };
-  //win checking done via state
   const winToggle = id => 
     setState(state => {
       const checked = { ...state.checked, [id]: !state.checked[id] };
@@ -42,7 +49,7 @@ export default function App() {
         ...state,
         checked,
         win
-      };
+      }
     });
 
   return (
@@ -54,18 +61,20 @@ export default function App() {
         {console.log(shuffled)}
       {
         //map shuffled array to populate tiles
-        Object.keys(shuffled).map(id => (
-          <Tile key={id} id={id} isSet={!!state.checked[id]} onToggle={() => winToggle(id)} >
+        Object.keys(shuffled).map(id => 
+          (
+          <Tile key={id} id={id} isSet={!!state.checked[id]} onToggle={() => winToggle(id) } >
             {shuffled[id]}
           </Tile>
         ))
       }
       </div>
-      
       {//win triggers fireworks
-      state.win ? <Fireworks /> : null
+      state.win ? <Fireworks />: null
       }
+     
     </div>
+    <button className="reset" onClick={refresh}>RESET</button>
     </div>
   );
 }

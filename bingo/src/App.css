@@ -13,7 +13,7 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: rgba(30, 30, 30, 0.97);
+	background-color: rgba(30, 30, 30, 0.95);
 }
 .App {
 	font-family: sans-serif;
@@ -31,13 +31,14 @@ h1 {
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: none;
 	text-align: center;
 }
 h1:focus {
 	outline: none;
 }
 .wrapper {
-	padding-top: 5%;
+	padding-top: 1vh;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -67,6 +68,35 @@ h1:focus {
 .tile-set {
 	border: 3px #d25252 solid;
 	box-shadow: 0 0 10px 4px #fff, 2px 2px 20px 6px #d25252;
+}
+
+.reset {
+	position: fixed;
+	left: 50%;
+	right: 50%;
+	transform: translate(-50%, -50%);
+	margin-top: 76vh;
+	background: none;
+	border: 2px #d25252 solid;
+	border-radius: 10px;
+	width: 20vw;
+	height: 5vh;
+	color: #fff;
+	box-shadow: 0 0 10px 4px #fff, 2px 2px 20px 6px #d25252;
+}
+
+@media only screen and (max-width: 375px) {
+	:root {
+		font-size: 0.2vh;
+	}
+	.h1 {
+		font-size: 0.8vh;
+		font-weight: 100;
+		width: 75%;
+	}
+	.reset {
+		margin-top: 65vh;
+	}
 }
 
 /* Animate neon flicker */

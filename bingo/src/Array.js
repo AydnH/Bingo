@@ -11,7 +11,6 @@ export const Data = [
     "could you share these slides afterwards?",
     "can somebody grant present rights?",
     "can you email that to everyone?",
-    " ",
     "sorry, I had problems logging in",
     "(animal noises in background)",
     "sorry, I couldnt find the coference id",
