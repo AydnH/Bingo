@@ -1,5 +1,5 @@
 //fisher yates shuffle to give unbias random order
-const arrayShuffler = (data) => {
+export default function arrayShuffler(data) {
     let chosenArray = data;
     let shuffle = [...chosenArray];
     const getRandomValue = (i, N) => Math.floor(Math.random() * (N - i) + i);
@@ -7,5 +7,3 @@ const arrayShuffler = (data) => {
     let finalOrder = shuffle;
     return finalOrder;
 }
-
-module.exports = arrayShuffler;
