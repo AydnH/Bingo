@@ -1,15 +1,16 @@
 import './App.css';
 import React, {useState, useEffect } from "react";
-import arrayShuffle from "shuffle-array"; //easy way to shuffle an array
-import Fireworks from './Fireworks';
-import { Data } from './Array';
+import arrayShuffler from './utils/shuffler';
+import Fireworks from './utils/Fireworks';
+import { Data } from './utils/Array';
 
-//use of arrayshuffle to randomise array 
-const shuffled = arrayShuffle(Data);
-const free = " ";
+//use of fisher yates shuffle to randomise array 
+const shuffled = arrayShuffler(Data);
+const free = "FREE";
+// console.log(shuffled)
 //insert empty value into middle of string
 const bingoArray = shuffled.splice(12, 0, free);
-console.log(bingoArray);
+// console.log(bingoArray);
 
 //tile format
 function Tile({ id, children, onToggle, isSet }) {
@@ -25,9 +26,11 @@ function refresh(){
 }
 
 export default function App() {
-  const [state, setState] = useState({ checked: {} });
-  //check if player has won
+  // middle tile is always free set in state
+  const [state, setState] = useState({ checked: {12:true} });
+  //check if player has won returns boolean
   const hasWon = checked => {
+    //range is based on column and row length of 5
     const range = [0, 1, 2, 3 ,4];
     return (
       //check columns
@@ -41,6 +44,7 @@ export default function App() {
         range.every(index => checked[index * 5 + 4 - index])
     );
   };
+  //on toggle function toggles state and checks for wins
   const winToggle = id => 
     setState(state => {
       const checked = { ...state.checked, [id]: !state.checked[id] };
@@ -58,18 +62,27 @@ export default function App() {
       <h1 className="heading">Zoom Call Bingo</h1>
 
       <div className="wrapper">
-        {console.log(shuffled)}
       {
         //map shuffled array to populate tiles
-        Object.keys(shuffled).map(id => 
-          (
-          <Tile key={id} id={id} isSet={!!state.checked[id]} onToggle={() => winToggle(id) } >
-            {shuffled[id]}
-          </Tile>
-        ))
+        Object.keys(shuffled).map(mapValue => {
+          // s
+          if (shuffled[mapValue] === free) {
+            return (
+              <Tile key={mapValue} id={mapValue} isSet={!!state.checked[mapValue]}>
+                {shuffled[mapValue]}
+              </Tile>
+            )
+          }
+          return (
+            <Tile key={mapValue} id={mapValue} isSet={!!state.checked[mapValue]} onToggle={() => winToggle(mapValue) } >
+              {shuffled[mapValue]}
+            </Tile>
+          )
+        }
+        )
       }
-      </div>
-      {//win triggers fireworks
+    </div>
+      {//win triggers fireworks animation
       state.win ? <Fireworks />: null
       }
      
